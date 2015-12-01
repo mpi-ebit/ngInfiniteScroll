@@ -104,7 +104,11 @@ mod.directive 'infiniteScroll', ['$rootScope', '$window', '$interval', 'THROTTLE
       handler = throttle(handler, THROTTLE_MILLISECONDS)
 
     scope.$on '$destroy', ->
-      container.unbind 'scroll', handler
+      if /iPad|iPhone|iPod|Mac/.test navigator.platform
+        container.unbind 'scroll touchmove', handler
+      else
+        container.unbind 'scroll', handler
+
       if unregisterEventListener?
         unregisterEventListener()
         unregisterEventListener = null
@@ -152,11 +156,16 @@ mod.directive 'infiniteScroll', ['$rootScope', '$window', '$interval', 'THROTTLE
     # a jQuery selector as a string.
     changeContainer = (newContainer) ->
       if container?
-        container.unbind 'scroll', handler
-
+        if /iPad|iPhone|iPod|Mac/.test navigator.platform
+            container.unbind 'scroll', handler
+        else
+            container.unbind 'scroll touchmove', handler
       container = newContainer
       if newContainer?
-        container.bind 'scroll', handler
+        if /iPad|iPhone|iPod|Mac/.test navigator.platform
+            container.bind 'scroll touchmove', handler
+        else
+            container.bind 'scroll', handler
 
     changeContainer windowElement
 

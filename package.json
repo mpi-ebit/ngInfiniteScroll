@@ -4,7 +4,7 @@
   "description": "Infinite scrolling for AngularJS",
   "repository": {
     "type": "git",
-    "url": "git://github.com/sroze/ngInfiniteScroll.git"
+    "url": "git://github.com/mpi-ebit/ngInfiniteScroll.git"
   },
   "browser": "build/ng-infinite-scroll.js",
   "scripts": {
